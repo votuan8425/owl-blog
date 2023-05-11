@@ -30,9 +30,22 @@ const main = async () => {
         username: process.env.DB_USERNAME,
         password: process.env.DB_PASSWORD,
         logging: true,
+        ...(__prod__
+            ? {
+                extra: {
+                    ssl: {
+                        rejectUnauthorized: false
+                    }
+                },
+                ssl: true
+            }
+            : {}),
+        ...(__prod__ ? {} : { synchronize: true }),
         synchronize: false,
         entities: [User, Post, Upvote]
     })
+
+    if (__prod__) await connection.runMigrations()
 
     const app = express()
 
