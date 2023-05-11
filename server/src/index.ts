@@ -24,6 +24,7 @@ import { Context } from "./types/Context"
 import { buildDataLoaders } from "./utils/dataLoaders"
 
 const main = async () => {
+
     const connection = await createConnection({
         type: "postgres",
         database: "Reddit",
