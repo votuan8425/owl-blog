@@ -99,11 +99,11 @@ const main = async () => {
     });
 
     await apolloServer.start()
+    const handler = apolloServer.createHandler();
+
+    app.use('/api/graphql', handler);
+
     app.listen(4000, () => console.log(`🚀🚀🚀 Server Started on port on ${PORT}, GraphQL server started on  ${PORT}${apolloServer.graphqlPath}`))
-
-    return apolloServer.createHandler({ path: '/api/graphql' });
-
-    // apolloServer.applyMiddleware({ app, cors: false })
 
 }
 main().catch(error => console.log(error))

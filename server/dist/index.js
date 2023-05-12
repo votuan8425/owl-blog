@@ -80,8 +80,9 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
         }),
     });
     yield apolloServer.start();
+    const handler = apolloServer.createHandler();
+    app.use('/api/graphql', handler);
     app.listen(4000, () => console.log(`🚀🚀🚀 Server Started on port on ${PORT}, GraphQL server started on  ${PORT}${apolloServer.graphqlPath}`));
-    return apolloServer.createHandler({ path: '/api/graphql' });
 });
 main().catch(error => console.log(error));
 exports.default = main;
