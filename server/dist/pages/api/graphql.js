@@ -56,7 +56,12 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
     return apolloServer.createHandler({ path: '/api/graphql' });
 });
 exports.default = cors((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const handler = yield main();
-    return req.method === 'OPTIONS' ? res.end() : handler(req, res);
+    if (req.method === 'OPTIONS') {
+        res.end();
+    }
+    else {
+        const handler = yield main();
+        return yield handler(req, res);
+    }
 }));
 //# sourceMappingURL=graphql.js.map

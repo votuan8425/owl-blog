@@ -59,7 +59,11 @@ const main = async () => {
 }
 
 export default cors(async (req, res) => {
-    const handler = await main();
-    return req.method === 'OPTIONS' ? res.end() : handler(req, res);
+    if (req.method === 'OPTIONS') {
+        res.end();
+    } else {
+        const handler = await main();
+        return await handler(req, res);
+    }
 });
 
