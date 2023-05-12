@@ -32,7 +32,7 @@ const post_1 = require("./resolvers/post");
 const cors_1 = __importDefault(require("cors"));
 const dataLoaders_1 = require("./utils/dataLoaders");
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
-    const connection = yield (0, typeorm_1.createConnection)(Object.assign(Object.assign(Object.assign({ type: "postgres", database: "Reddit", username: process.env.DB_USERNAME, password: process.env.DB_PASSWORD, logging: true }, (contanst_1.__prod__
+    const connection = yield (0, typeorm_1.createConnection)(Object.assign(Object.assign(Object.assign({ type: "postgres", database: contanst_1.__prod__ ? process.env.POSTGRES_DB : "Reddit", username: process.env.DB_USERNAME, password: process.env.DB_PASSWORD, logging: true }, (contanst_1.__prod__
         ? {
             extra: {
                 ssl: {

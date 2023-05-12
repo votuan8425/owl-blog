@@ -27,7 +27,7 @@ const main = async () => {
 
     const connection = await createConnection({
         type: "postgres",
-        database: "Reddit",
+        database: __prod__ ? process.env.POSTGRES_DB : "Reddit",
         username: process.env.DB_USERNAME,
         password: process.env.DB_PASSWORD,
         logging: true,
