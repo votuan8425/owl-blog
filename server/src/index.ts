@@ -6,10 +6,9 @@ import { createConnection } from "typeorm"
 import { User } from "./entities/User"
 import { Post } from "./entities/Post"
 import { Upvote } from "./entities/Upvote"
-import { ApolloServer } from "apollo-server-express"
+import { ApolloServer } from "apollo-server-micro"
 import { buildSchema } from "type-graphql"
 import { HelloResolver } from "./resolvers"
-import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core"
 import { UserResolver } from "./resolvers/user"
 import mongoose from "mongoose"
 
@@ -85,17 +84,29 @@ const main = async () => {
 
     const PORT = process.env.PORT || 4000
 
+ // Create a new Apollo Server instance
     const apolloServer = new ApolloServer({
-        schema: await buildSchema({ resolvers: [HelloResolver, UserResolver, PostResolver], validate: false }),
-        context: ({ req, res }): Context => ({ req, res, connection, dataLoaders: buildDataLoaders() }),
-        plugins: [ApolloServerPluginLandingPageGraphQLPlayground()]
-    })
+        schema: await buildSchema({
+            resolvers: [HelloResolver, UserResolver, PostResolver],
+            validate: false,
+        }),
+        context: ({ req, res }): Context => ({
+            req,
+            res,
+            connection,
+            dataLoaders: buildDataLoaders(),
+        }),
+    });
 
     await apolloServer.start()
-
-    apolloServer.applyMiddleware({ app, cors: false })
-
     app.listen(4000, () => console.log(`🚀🚀🚀 Server Started on port on ${PORT}, GraphQL server started on  ${PORT}${apolloServer.graphqlPath}`))
-}
 
+    return apolloServer.createHandler({ path: '/api/graphql' });
+
+    // apolloServer.applyMiddleware({ app, cors: false })
+
+}
 main().catch(error => console.log(error))
+
+export default main;
+

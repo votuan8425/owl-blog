@@ -19,10 +19,9 @@ const typeorm_1 = require("typeorm");
 const User_1 = require("./entities/User");
 const Post_1 = require("./entities/Post");
 const Upvote_1 = require("./entities/Upvote");
-const apollo_server_express_1 = require("apollo-server-express");
+const apollo_server_micro_1 = require("apollo-server-micro");
 const type_graphql_1 = require("type-graphql");
 const resolvers_1 = require("./resolvers");
-const apollo_server_core_1 = require("apollo-server-core");
 const user_1 = require("./resolvers/user");
 const mongoose_1 = __importDefault(require("mongoose"));
 const connect_mongo_1 = __importDefault(require("connect-mongo"));
@@ -68,14 +67,22 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
         resave: false
     }));
     const PORT = process.env.PORT || 4000;
-    const apolloServer = new apollo_server_express_1.ApolloServer({
-        schema: yield (0, type_graphql_1.buildSchema)({ resolvers: [resolvers_1.HelloResolver, user_1.UserResolver, post_1.PostResolver], validate: false }),
-        context: ({ req, res }) => ({ req, res, connection, dataLoaders: (0, dataLoaders_1.buildDataLoaders)() }),
-        plugins: [(0, apollo_server_core_1.ApolloServerPluginLandingPageGraphQLPlayground)()]
+    const apolloServer = new apollo_server_micro_1.ApolloServer({
+        schema: yield (0, type_graphql_1.buildSchema)({
+            resolvers: [resolvers_1.HelloResolver, user_1.UserResolver, post_1.PostResolver],
+            validate: false,
+        }),
+        context: ({ req, res }) => ({
+            req,
+            res,
+            connection,
+            dataLoaders: (0, dataLoaders_1.buildDataLoaders)(),
+        }),
     });
     yield apolloServer.start();
-    apolloServer.applyMiddleware({ app, cors: false });
     app.listen(4000, () => console.log(`🚀🚀🚀 Server Started on port on ${PORT}, GraphQL server started on  ${PORT}${apolloServer.graphqlPath}`));
+    return apolloServer.createHandler({ path: '/api/graphql' });
 });
 main().catch(error => console.log(error));
+exports.default = main;
 //# sourceMappingURL=index.js.map
