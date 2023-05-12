@@ -11,6 +11,7 @@ import { HelloResolver } from '../..//resolvers';
 import { UserResolver } from '../..//resolvers/user';
 import { PostResolver } from '../..//resolvers/post';
 import { Context } from '../..//types/Context';
+import { ApolloServerPluginInlineTrace } from 'apollo-server-core';
 
 const cors = Cors({
     allowMethods: ['POST', 'OPTIONS'],
@@ -52,6 +53,7 @@ const main = async () => {
             dataLoaders: buildDataLoaders(),
         }),
         introspection: true,
+        plugins: [ApolloServerPluginInlineTrace()],
     });
 
     await apolloServer.start()

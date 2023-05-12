@@ -24,6 +24,7 @@ const dataLoaders_1 = require("../..//utils/dataLoaders");
 const resolvers_1 = require("../..//resolvers");
 const user_1 = require("../..//resolvers/user");
 const post_1 = require("../..//resolvers/post");
+const apollo_server_core_1 = require("apollo-server-core");
 const cors = (0, micro_cors_1.default)({
     allowMethods: ['POST', 'OPTIONS'],
 });
@@ -52,6 +53,7 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
             dataLoaders: (0, dataLoaders_1.buildDataLoaders)(),
         }),
         introspection: true,
+        plugins: [(0, apollo_server_core_1.ApolloServerPluginInlineTrace)()],
     });
     yield apolloServer.start();
     return apolloServer.createHandler({ path: '/api/graphql' });
