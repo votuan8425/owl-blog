@@ -50,10 +50,14 @@ const main = async () => {
 
     const app = express()
 
-    app.use(cors({
-        origin: "http://localhost:3000",
-        credentials: true
-    }))
+    app.use(
+        cors({
+            origin: __prod__
+                ? process.env.CORS_ORIGIN_PROD
+                : process.env.CORS_ORIGIN_DEV,
+            credentials: true
+        })
+    )
 
     const mongoUrl = `mongodb+srv://${process.env.SESSION_DB_USERNAME_DEV_PROD}:${process.env.SESSION_DB_PASSWORD_DEV_PROD}@reddit-fullstack.dtw9y9h.mongodb.net/?retryWrites=true&w=majority`
 

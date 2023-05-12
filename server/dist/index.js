@@ -32,18 +32,23 @@ const post_1 = require("./resolvers/post");
 const cors_1 = __importDefault(require("cors"));
 const dataLoaders_1 = require("./utils/dataLoaders");
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
-    const connection = yield (0, typeorm_1.createConnection)({
-        type: "postgres",
-        database: "Reddit",
-        username: process.env.DB_USERNAME,
-        password: process.env.DB_PASSWORD,
-        logging: true,
-        synchronize: false,
-        entities: [User_1.User, Post_1.Post, Upvote_1.Upvote]
-    });
+    const connection = yield (0, typeorm_1.createConnection)(Object.assign(Object.assign(Object.assign({ type: "postgres", database: "Reddit", username: process.env.DB_USERNAME, password: process.env.DB_PASSWORD, logging: true }, (contanst_1.__prod__
+        ? {
+            extra: {
+                ssl: {
+                    rejectUnauthorized: false
+                }
+            },
+            ssl: true
+        }
+        : {})), (contanst_1.__prod__ ? {} : { synchronize: true })), { synchronize: false, entities: [User_1.User, Post_1.Post, Upvote_1.Upvote] }));
+    if (contanst_1.__prod__)
+        yield connection.runMigrations();
     const app = (0, express_1.default)();
     app.use((0, cors_1.default)({
-        origin: "http://localhost:3000",
+        origin: contanst_1.__prod__
+            ? process.env.CORS_ORIGIN_PROD
+            : process.env.CORS_ORIGIN_DEV,
         credentials: true
     }));
     const mongoUrl = `mongodb+srv://${process.env.SESSION_DB_USERNAME_DEV_PROD}:${process.env.SESSION_DB_PASSWORD_DEV_PROD}@reddit-fullstack.dtw9y9h.mongodb.net/?retryWrites=true&w=majority`;
