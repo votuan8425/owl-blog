@@ -51,6 +51,7 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
             connection,
             dataLoaders: (0, dataLoaders_1.buildDataLoaders)(),
         }),
+        introspection: true,
     });
     yield apolloServer.start();
     return apolloServer.createHandler({ path: '/api/graphql' });

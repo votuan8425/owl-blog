@@ -51,6 +51,7 @@ const main = async () => {
             connection,
             dataLoaders: buildDataLoaders(),
         }),
+        introspection: true,
     });
 
     await apolloServer.start()
