@@ -51,8 +51,8 @@ function createApolloClient(headers: IncomingHttpHeaders | null = null) {
 		// uri: 'http://localhost:4000/graphql', // Server URL (must be absolute)
 		uri:
 			process.env.NODE_ENV === 'production'
-				? 'https://owl-blog-backend-votuan8425.vercel.app/graphql'
-				: 'http://localhost:4000/graphql',
+				? 'https://owl-blog-backend-production.up.railway.app/api/graphql'
+				: 'http://localhost:4000/api/graphql',
 		credentials: 'include', // Additional fetch() options like `credentials` or `headers`
 		fetch: enhancedFetch
 	})
