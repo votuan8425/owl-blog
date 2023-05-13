@@ -72,10 +72,6 @@ const Post = () => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    // [
-    //   { params: { id: '15'} },
-    //   { params: { id: '16'} }
-    // ]
 
     const apolloClient = initializeApollo()
 

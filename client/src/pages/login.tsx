@@ -60,9 +60,6 @@ const Login = () => {
 				isClosable: true
 			})
 
-			// const apolloClient = initializeApollo()
-			// apolloClient.resetStore()
-
 			router.push('/')
 		}
 	}
