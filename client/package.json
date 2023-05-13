@@ -9,8 +9,8 @@
   "dependencies": {
     "@apollo/client": "^3.3.21",
     "@chakra-ui/icons": "2.0.19",
-    "@chakra-ui/react": "2.6.1",
-    "@chakra-ui/theme-tools": "1.1.2",
+    "@chakra-ui/react": "^2.6.1",
+    "@chakra-ui/theme-tools": "^2.0.16",
     "@emotion/react": "11.10.8",
     "@emotion/styled": "11.1.5",
     "deepmerge": "4.3.1",
