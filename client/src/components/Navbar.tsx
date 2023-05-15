@@ -1,4 +1,4 @@
-import { Box, Flex, Link, Button, useColorMode } from '@chakra-ui/react'
+import { Box, Flex, Link, Button } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import {
 	MeDocument,
