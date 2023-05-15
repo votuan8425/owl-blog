@@ -57,7 +57,7 @@ const PostEditDeleteButtons = ({
 	if (meData?.me?.id !== postUserId) return null
 
 	return (
-		<Box>
+		<Box display="flex">
 			<NextLink href={`/post/edit/${postId}`}>
 				<IconButton icon={<EditIcon />} aria-label='edit' mr={4} />
 			</NextLink>

@@ -69,7 +69,7 @@ const Navbar = () => {
 		body = (
 			<Flex>
 				<NextLink href='/create-post'>
-					<Button mr={4}>Create Post</Button>
+					<Button mr={4} >Create Post</Button>
 				</NextLink>
 				<Button onClick={logoutUser} isLoading={useLogoutMutationLoading}>
 					Logout

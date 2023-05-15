@@ -15,6 +15,7 @@ const Wrapper = ({ children, size = 'regular' }: IWrapperProps) => {
             w='100%'
             mt={8}
             mx='auto'
+            padding="5px 20px"
         >
             {children}
         </Box>

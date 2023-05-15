@@ -41,13 +41,17 @@ const Index = () => {
 					{data?.posts?.paginatedPosts.map(post => (
 						<Flex key={post.id} p={5} shadow='md' borderWidth='1px' borderRadius="10px">
 							<UpvoteSection post={post} />
-							<Box flex={1}>
+							<Box flex={1} display="flex" alignItems="center" justifyContent="space-between">
+								<div>
 								<NextLink href={`/post/${post.id}`} passHref>
 									<Heading fontSize='xl'>{post.title}</Heading>
 								</NextLink>
 								<Text>posted by {post.user.username}</Text>
 								<Flex align='center'>
 									<Text mt={4}>{post.textSnippet}</Text>
+									</Flex>
+								</div>
+								<Flex>
 									<Box ml='auto'>
 										<PostEditDeleteButtons
 											postId={post.id}

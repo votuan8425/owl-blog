@@ -40,8 +40,10 @@ const UpvoteSection = ({ post }: UpvoteSectionProps) => {
 	}
 
 	return (
-		<Flex direction='column' alignItems='center' mr={4}>
+		<Flex direction='column' alignItems='center' mr={4} justifyContent="space-between">
 			<IconButton
+				w={{ mb: "8", md: "9" }}
+				h={{ mb: "8", md: "9" }}
 				icon={<ChevronUpIcon />}
 				aria-label='upvote'
 				onClick={
@@ -54,9 +56,11 @@ const UpvoteSection = ({ post }: UpvoteSectionProps) => {
 					post.voteType === VoteTypeValues.Upvote ? 'green' : undefined
 				}
 			/>
-			{post.points}
+			<p style={{ margin: "5px 0" }}>{post.points}</p>
 			<IconButton
 				icon={<ChevronDownIcon />}
+				w={{ mb: "8", md: "9" }}
+				h={{ mb: "8", md: "9" }}
 				aria-label='downvote'
 				onClick={
 					post.voteType === VoteTypeValues.Downvote
