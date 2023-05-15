@@ -1,5 +1,5 @@
 import { Formik, Form, FormikHelpers } from 'formik'
-import { Button, Box, Flex, Spinner, useToast } from '@chakra-ui/react'
+import { Button, Box, Flex, Spinner, useToast, Link } from '@chakra-ui/react'
 import Wrapper from '../components/Wrapper'
 import InputField from '../components/InputField'
 
@@ -13,6 +13,8 @@ import { mapFieldErrors } from '../helpers/mapFieldErrors'
 import { useRouter } from 'next/router'
 import { useCheckAuth } from '../utils/useCheckAuth'
 import Head from 'next/head'
+import NextLink from 'next/link'
+
 
 const Register = () => {
 	const router = useRouter()
@@ -97,6 +99,11 @@ const Register = () => {
 										type='password'
 									/>
 								</Box>
+									<Flex mt={2}>
+										<NextLink href='/login'>
+											<Link ml='auto'>I already have an account ?</Link>
+										</NextLink>
+									</Flex>
 								<Button
 									type='submit'
 									colorScheme='teal'

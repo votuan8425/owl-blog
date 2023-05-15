@@ -34,10 +34,6 @@ const Login = () => {
 				loginInput: values
 			},
 			update(cache, { data }) {
-				console.log('DATA LOGIN', data)
-
-				// const meData = cache.readQuery({ query: MeDocument })
-				// console.log('MEDATA', meData)
 
 				if (data?.login?.success) {
 					cache.writeQuery<MeQuery>({
@@ -98,10 +94,13 @@ const Login = () => {
 										/>
 									</Box>
 
-									<Flex mt={2}>
+										<Flex mt={2} justifyContent="space-between">
 										<NextLink href='/forgot-password'>
 											<Link ml='auto'>Forgot Password</Link>
 										</NextLink>
+											<NextLink href='/forgot-password'>
+												<Link ml='auto'>Register</Link>
+											</NextLink>
 									</Flex>
 
 									<Button

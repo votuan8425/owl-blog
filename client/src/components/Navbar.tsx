@@ -1,4 +1,4 @@
-import { Box, Flex, Link, Button } from '@chakra-ui/react'
+import { Box, Flex, Link, Button, useColorMode } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import {
 	MeDocument,
@@ -9,6 +9,7 @@ import {
 import { Reference, gql } from '@apollo/client'
 
 import Image from 'next/image'
+import ToggleDarkMode from './ToggleDarkMode'
 
 const Navbar = () => {
 	const { data, loading: useMeQueryLoading } = useMeQuery()
@@ -57,7 +58,7 @@ const Navbar = () => {
 		body = (
 			<>
 				<NextLink href='/login'>
-					<Link mr={2} color="#CCCCCC">Login</Link>
+					<Link mr={3} color="#CCCCCC">Login</Link>
 				</NextLink>
 				<NextLink href='/register' >
 					<Link color="#CCCCCC">Register</Link>
@@ -77,13 +78,17 @@ const Navbar = () => {
 		)
 	}
 
+
 	return (
-		<Box bg="blackAlpha.800" p={1}>
+		<Box bg="gray.800" p={2}>
 			<Flex maxW={1000} justifyContent='space-between' align='center' m='auto'>
 				<NextLink href='/' style={{ display: "flex", alignItems: "center" }}>
-					<Image src="/logo.png" width={95} height={78} alt='Logo' />
+					<Image src="/logo.png" width={90} height={78} alt='Logo' />
 				</NextLink>
+				<Flex align="center" gap={2}>
 				<Box>{body}</Box>
+					<ToggleDarkMode />
+				</Flex>
 			</Flex>
 		</Box>
 	)
